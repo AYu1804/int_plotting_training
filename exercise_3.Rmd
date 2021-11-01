@@ -1,0 +1,41 @@
+---
+title: "<center>![](www/nhsr_logo.png){width=250px}</center>"
+pagetitle: "Title"
+author: "Author"
+date: '`r Sys.Date()`'
+logo: "nhsr_logo.png"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE)
+
+library(tidyverse)
+library(plotly)
+library(echarts4r)
+library(rmarkdown)
+
+mh <- read_csv("mhtreatment_data.csv")
+```
+
+## Patients in treatment
+
+An example SPC chart using fake data. 
+
+```{r spc all}
+mh %>% 
+  filter(Group == "Male") %>% # filter to male patients
+  e_charts(Date) %>%# over time
+  e_line(value) %>% # first line layer for values
+  e_line(mean, symbol = "none") %>%  # second line layer for mean (without symbols)
+  e_line(upper_ci, symbol = "none") %>% # third line for upper CI
+  e_line(lower_ci, symbol = "none") %>% # fourth line for lower CI
+  e_tooltip(trigger = "axis") %>% 
+  e_theme_custom("custom.json")
+```
+
+## Comparison by sex
+
+```{r spc sex}
+
+```
