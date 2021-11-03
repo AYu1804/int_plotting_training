@@ -160,5 +160,5 @@ female <- mh %>%
   e_connect_group("mh") # connect this plot with any plots with the same group ID
 
 # use e_arrange to plot them together
-e_arrange(male, female, ncol = 2)
+e_arrange(male, female, cols = 2)
 
